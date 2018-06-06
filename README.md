@@ -15,11 +15,11 @@ SSL complaints from DNA centers without a valid certificate
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 ## Run Sample
-node ./sample.js <IP> <USER> <PASSWORD>
-where,
-<IP>: IP Address or DNS Name of cluster
-<USER>: DNAC User Name
-<PASSWORD>: DNAC User Password
-
-Sample source contains basic authentication
-and API samples and a console log of the response.
+> node ./sample.js <IP> <USER> <PASSWORD>
+> where,
+> <IP>: IP Address or DNS Name of cluster
+> <USER>: DNAC User Name
+> <PASSWORD>: DNAC User Password
+> 
+> Sample source contains basic authentication
+> and API samples and a console log of the response.
