@@ -1,5 +1,6 @@
 /* Sample File for Using the JS SDK */
 
+/* Note: All callbacks are asynchronous in nature */
 
 /* JS Wrapper and btoa requires */
 var apiWrapper = require('./DnaJsApi/src/index');
@@ -30,50 +31,29 @@ process.argv.forEach(function (val, index, array) {
     }
 });
 
-/* Authentication with DNAC */
+/* Create Client for using API */
 var apiClient = new apiWrapper.ApiClient;
-var networkDeviceApi = new apiWrapper.NetworkDeviceApi(apiClient);
-
 apiClient.enableCookies = false;
 apiClient.basePath = "https://" + clusterName;
 
-var authTypes = [];
-var contentTypes = [];
-var accepts = [];
+/* Use same client handle for authentication */
+var authApi = new apiWrapper.MiscApi(apiClient);
+var networkDeviceApi = new apiWrapper.NetworkDeviceApi(apiClient);
 
+/* Frame header token for basic authentication username:password encoded in base64 format */
 var tok = btoa(clusterUser + ":" + clusterPassword);
 
-var pathParams = {};
-var queryParams = {};
-var collectionQueryParams = {};
-var headerParams = {
-  'Authorization': "Basic " + tok 
-};
-var formParams = {};
-var postBody = null;
-var authNames = [];
-var contentTypes = ['application/json'];
-var accepts = [];
-var returnType = apiWrapper.GenerateTokenResponse;
-var tokenCookie;
-
-apiClient.callApi(
-  '/api/system/v1/auth/token', 'POST',
-  pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-  authTypes, contentTypes, accepts, returnType, function(error, data, response) {
-       console.log(response.body.Token);
-       tokenCookie = response.body.Token;
-       console.log(tokenCookie);
-       apiClient.defaultHeaders = {
-           'X-AUTH-TOKEN': tokenCookie
-       };
-       /* API To retrieve network device count */
-       networkDeviceApi.getNetworkDeviceCount(function(error, data, response) {
-           console.log(response);
-       });
-       /* API To retrieve all network devices */
-       networkDeviceApi.getNetworkDevice(null, function(error, data, response) {
-           console.log(response);
-       });
-  });
-
+authApi.postAuthToken({}, "Basic " + tok , function(error, data, response) {
+      var tokenCookie = response.body.Token;
+      apiClient.defaultHeaders = {
+          'X-AUTH-TOKEN': tokenCookie
+        };
+    /* API To retrieve network device count */
+    networkDeviceApi.getNetworkDeviceCount(function(error, data, response) {
+          console.log(response);
+        });
+    /* API To retrieve all network devices */
+    networkDeviceApi.getNetworkDevice(null, function(error, data, response) {
+          console.log(response);
+        });
+});

@@ -1,10 +1,10 @@
 # JS SDK For DNA Center
 
 ## Pre-Requisites
-node & npm
-node > 8.11.2
-npm  > 5.6.0
-
+node & npm  
+node > 8.11.2  
+npm  > 5.6.0  
+  
 ## Environment setup
 Run the prepjsenv.sh script at the root of the directory
 It installs node_modules in the root of the directory and also the DnsJsAPi
