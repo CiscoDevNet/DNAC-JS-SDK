@@ -1,0 +1,17 @@
+{
+  "name": "swagger",
+  "version": "1.0.0",
+  "description": "",
+  "license": "Unlicense",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --recursive"
+  },
+  "browser": {
+    "fs": false
+  },
+  "dependencies": {
+    "btoa": "^1.2.1"
+  },
+  "devDependencies": {}
+}
