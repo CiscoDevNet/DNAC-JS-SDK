@@ -1,14 +1,16 @@
+/* Sample File for Using the JS SDK */
+
+
+/* JS Wrapper and btoa requires */
 var apiWrapper = require('./DnaJsApi/src/index');
 var btoa = require('btoa');
 
+/* Command Line Option Processing */
 var nodeOptions = Object.freeze({"PROGRAM":0,
                                  "APPLICATION":1,
                                  "NAME":2,
                                  "USER":3,
                                  "PASSWORD":4});
-
-console.log(nodeOptions.PROGRAM);
-
 var clusterName="";
 var clusterUser="";
 var clusterPassword="";
@@ -28,8 +30,9 @@ process.argv.forEach(function (val, index, array) {
     }
 });
 
+/* Authentication with DNAC */
 var apiClient = new apiWrapper.ApiClient;
-var defaultApi = new apiWrapper.NetworkDeviceApi(apiClient);
+var networkDeviceApi = new apiWrapper.NetworkDeviceApi(apiClient);
 
 apiClient.enableCookies = false;
 apiClient.basePath = "https://" + clusterName;
@@ -64,11 +67,12 @@ apiClient.callApi(
        apiClient.defaultHeaders = {
            'X-AUTH-TOKEN': tokenCookie
        };
-       defaultApi.getNetworkDeviceCount(function(error, data, response) {
+       /* API To retrieve network device count */
+       networkDeviceApi.getNetworkDeviceCount(function(error, data, response) {
            console.log(response);
        });
-       defaultApi.getNetworkDevice(null, function(error, data, response) {
-           console.log(error);
+       /* API To retrieve all network devices */
+       networkDeviceApi.getNetworkDevice(null, function(error, data, response) {
            console.log(response);
        });
   });
