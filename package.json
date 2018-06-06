@@ -1,12 +1,10 @@
 {
-  "name": "swagger",
-  "version": "1.0.0",
+  "name": "dnac-api-js-sdk",
+  "version": "0.0.1",
   "description": "",
-  "license": "Unlicense",
-  "main": "index.js",
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive"
-  },
+  "license": "MIT",
+  "main": "sample.js",
+  "scripts": {},
   "browser": {
     "fs": false
   },
