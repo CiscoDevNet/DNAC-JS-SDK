@@ -20,5 +20,4 @@ where,
 IP: IP Address or DNS Name of cluster  
 USER: DNAC User Name  
 PASSWORD: DNAC User Password  
-Sample source contains basic authentication    
-and API samples and a console log of the response.    
+Sample source contains basic authentication, API samples and a console log of the response.
